@@ -7,7 +7,11 @@ generateTodoDOM.innerText = "Text agregado"; */
 
 const formulario = document.querySelector('#new-todo');
 const todos = []
-
+const filters = {
+    searchTitle: '',
+    showFinished: false,
+    showUnfinished: false
+}
 
 const renderTodos = (todos) => {
     const todoList = document.querySelector('#todos')

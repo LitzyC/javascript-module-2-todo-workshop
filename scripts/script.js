@@ -26,28 +26,57 @@ const renderTodos = (todos) => {
     })
 }
 
-const generateTodoDOM = (todo) => {
-    const todoEl = document.createElement('label');
-    const containerEl = document.createElement('div');
-    const todoText = document.createElement('span');
+const generateTodoDOM = (todoObj) => {
+    const todoEl = document.createElement('label')
+    const containerEl = document.createElement('div')
+    const todoText = document.createElement('span')
+
+    // Setup todo checkbox
+    const checkbox = document.createElement('input')
+    checkbox.setAttribute('type', 'checkbox')
+    checkbox.checked = todoObj.completed
+    containerEl.appendChild(checkbox)
+    checkbox.addEventListener('change', () => {
+        toggleTodo(todoObj.title)
+        renderTodos(todos)
+    })
 
     // Setup the todo text
-    todoText.textContent = todo;
-    containerEl.appendChild(todoText);
+    todoText.textContent = todoObj.title
+    containerEl.appendChild(todoText)
 
     // Setup container
-    todoEl.classList.add('list-item');
-    containerEl.classList.add('list-item__container');
-    todoEl.appendChild(containerEl);
+    todoEl.classList.add('list-item')
+    containerEl.classList.add('list-item__container')
+    todoEl.appendChild(containerEl)
 
-    return todoEl;
+    // Setup the remove button
+    const removeButton = document.createElement('button')
+    removeButton.textContent = 'remove'
+    removeButton.classList.add('button', 'button--text')
+    todoEl.appendChild(removeButton)
+    removeButton.addEventListener('click', () => {
+        removeTodo(todoObj.title)
+        renderTodos(todos)
+    })
+
+    return todoEl
+}
+
+const toggleTodo = (title) => {
+    const todo = todos.find((todo) => todo.title.toLowerCase() === title.toLowerCase())
+
+    if (todo) {
+        todo.completed = !todo.completed
+    }
 }
 
 const createTodo = (text) => {
-    todos.push(text)({
+    const todo = {
         title: text,
-        completed: false
-    })
+        completed: false,
+    };
+    todos.push(todo);
 }
 
 const evento =  (e) => {

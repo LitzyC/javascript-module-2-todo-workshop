@@ -64,6 +64,22 @@ const toggleTodo = (title) => {
 }
 
 
+const createTodo = (text) => {
+    const todo = {
+        title: text,
+        completed: false,
+    };
+    todos.push(todo);
+}
+
+const removeTodo = (title) => {
+    const todoIndex = todos.findIndex((todo) => todo.title.toLowerCase() === title.toLowerCase())
+
+    if (todoIndex > -1) {
+        todos.splice(todoIndex, 1)
+    }
+}
+
 const evento =  (e) => {
     e.preventDefault()
     const text = e.target.elements.text.value.trim()

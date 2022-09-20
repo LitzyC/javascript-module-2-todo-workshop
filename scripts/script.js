@@ -8,14 +8,6 @@ generateTodoDOM.innerText = "Text agregado"; */
 const formulario = document.querySelector('#new-todo');
 const todos = []
 
-const removeTodo = (todoEl) => {
-    const todoIndex = todos.findIndex((todo) => {
-        return todo.toLowerCase() === todoEl.textContent.toLowerCase()
-    })
-    if (todoIndex > -1) {
-        todos.splice(todoIndex, 1)
-    }
-}
 
 const renderTodos = (todos) => {
     const todoList = document.querySelector('#todos')
@@ -71,13 +63,6 @@ const toggleTodo = (title) => {
     }
 }
 
-const createTodo = (text) => {
-    const todo = {
-        title: text,
-        completed: false,
-    };
-    todos.push(todo);
-}
 
 const evento =  (e) => {
     e.preventDefault()

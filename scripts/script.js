@@ -5,8 +5,7 @@ let myElement = document.querySelector("#boton");
 myElement.appendChild(generateTodoDOM);
 generateTodoDOM.innerText = "Text agregado"; */
 
-const formulario = document.querySelector('#new-todo');
-const todos = []
+let todos = []
 const filters = {
     searchTitle: '',
     showFinished: false,
@@ -84,7 +83,20 @@ const removeTodo = (title) => {
     }
 }
 
-const evento =  (e) => {
+
+document.querySelector("#new-todo").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const text = e.target.elements.text.value.trim();
+
+  if (text.length > 0) {
+    createTodo(text);
+    e.target.elements.text.value = "";
+  }
+  renderTodos(todos);
+});
+renderTodos(todos);
+
+/*const evento =  (e) => {
     e.preventDefault()
     const text = e.target.elements.text.value.trim()
     
@@ -95,4 +107,4 @@ const evento =  (e) => {
     console.log("Texto añadido: " + todos);
 
 };
-formulario.addEventListener('submit', evento);
+formulario.addEventListener('submit', evento);*/

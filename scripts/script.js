@@ -12,6 +12,18 @@ const filters = {
     showUnfinished: false
 }
 
+const setFilters = (updates) => {
+    if(typeof updates.searchTitle === 'string'){
+        filters.searchTitle = updates.searchTitle;
+    }
+    if(typeof updates.showFinished === 'boolean'){
+        filters.searchTitle=updates.showFinished;
+    }
+    if(typeof updates.showUnfinished === 'boolean'){
+        filters.searchTitle = updates.showUnfinished;
+    }
+}
+
 const renderTodos = (todos) => {
     const todoList = document.querySelector('#todos')
     todoList.innerHTML = ''

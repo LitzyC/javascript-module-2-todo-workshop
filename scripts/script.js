@@ -14,7 +14,7 @@ const filters = {
 
 document.querySelector('#search-text').addEventListener('input', (e) => {
     setFilters({
-        searchTitle: e.target.value;
+        searchTitle: e.target.value
     })
     renderTodos(todos);
 })
@@ -46,12 +46,28 @@ const setFilters = (updates) => {
 }
 
 const renderTodos = (todos) => {
+    let filteredTodos = todos.filter((todo) => todo.title.toLowerCase().includes(filters.searchTitle.toLowerCase()))
+    if (filters.showFinished && filters.showUnfinished){
+
+    }else if(filters.showFinished){
+        filteredTodos = filteredTodos.filter((todo) => todo.completed)
+    }else if(filters.showFinished){
+        filteredTodos = filteredTodos.filter((todo) => todo.completed)
+    }
+
     const todoList = document.querySelector('#todos')
     todoList.innerHTML = ''
 
-    todos.forEach((todo) => {
+    if (filteredTodos.length > 0){
+        filteredTodos.forEach((todo) => {
             todoList.appendChild(generateTodoDOM(todo))
-    })
+        })
+    }else {
+        const messageEl = document.createElement('p');
+        messageEl.classList.add('empty-message')
+        messageEl.textContent = 'There are no "todos" to show'
+        todoList.appendChild(messageEl);
+    }
 }
 
 const generateTodoDOM = (todoObj) => {

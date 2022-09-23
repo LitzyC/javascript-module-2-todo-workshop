@@ -12,6 +12,27 @@ const filters = {
     showUnfinished: false
 }
 
+document.querySelector('#search-text').addEventListener('input', (e) => {
+    setFilters({
+        searchTitle: e.target.value;
+    })
+    renderTodos(todos);
+})
+
+document.querySelector('#show-finished').addEventListener('change', (e) => {
+    setFilters({
+        showFinished: e.target.checked
+    })
+    renderTodos(todos);
+})
+
+document.querySelector('#show-unfinished').addEventListener('change', (e) => {
+    setFilters({
+        showUnfinished: e.target.checked
+    })
+    renderTodos(todos);
+})
+
 const setFilters = (updates) => {
     if(typeof updates.searchTitle === 'string'){
         filters.searchTitle = updates.searchTitle;

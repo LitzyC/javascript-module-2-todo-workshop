@@ -5,6 +5,8 @@ let myElement = document.querySelector("#boton");
 myElement.appendChild(generateTodoDOM);
 generateTodoDOM.innerText = "Text agregado"; */
 
+//Variable, funciones principales, eventos
+
 let todos = []
 const filters = {
     searchTitle: '',
@@ -32,6 +34,13 @@ document.querySelector('#show-unfinished').addEventListener('change', (e) => {
     })
     renderTodos(todos);
 })
+
+const saveTodosToLocalStorage = () => {
+    ls.setItem('todos', JSON.stringify(todos));
+}
+
+
+
 
 const setFilters = (updates) => {
     if(typeof updates.searchTitle === 'string'){
@@ -115,7 +124,6 @@ const toggleTodo = (title) => {
     }
 }
 
-
 const createTodo = (text) => {
     const todo = {
         title: text,
@@ -143,7 +151,10 @@ document.querySelector("#new-todo").addEventListener("submit", (e) => {
   }
   renderTodos(todos);
 });
+
+
 renderTodos(todos);
+
 
 /*const evento =  (e) => {
     e.preventDefault()
@@ -156,4 +167,5 @@ renderTodos(todos);
     console.log("Texto añadido: " + todos);
 
 };
+
 formulario.addEventListener('submit', evento);*/

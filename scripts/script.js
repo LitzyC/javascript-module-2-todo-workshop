@@ -39,8 +39,19 @@ const saveTodosToLocalStorage = () => {
     ls.setItem('todos', JSON.stringify(todos));
 }
 
+const ls = window.localStorage;
+console.log(ls);
+ls.setItem("Litzy ","Cabrera");
 
-
+const fetchTodosFromLocalStorage = () => {
+    const todosJSON = ls.getItem("todos");
+    if (todosJSON) {
+        todos = JSON.parse(todosJSON);
+    }
+    else{
+        todos = [];
+    }
+}
 
 const setFilters = (updates) => {
     if(typeof updates.searchTitle === 'string'){
